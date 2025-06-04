@@ -6,3 +6,7 @@ edition = "2024"
 [dependencies]
 crc32fast = "1.4.2"
 hound = "3.5.1"
+
+[[bin]]
+name = "sencode"
+path = "src/main.rs"
