@@ -31,13 +31,14 @@ pub fn decode(path: &Path, output_filename: &Path) {
 
     if checksum == stored_checksum {
         println!("Checksum matches!");
-        println!("File written to: {}", output_filename_final.to_string_lossy());
-        let mut out_file = File::create(output_filename_final).expect("failed to create output file");
-        out_file.write_all(file_data).expect("failed to write output file");
         } else {
             eprintln!("Found checksum: {}", checksum);
             eprintln!("Stored checksum: {}", stored_checksum);
-            panic!("Checksums don't match")
+            eprintln!("Checksums don't match")
         }
+        println!("File written to: {}", output_filename_final.to_string_lossy());
+        let mut out_file = File::create(output_filename_final).expect("failed to create output file");
+        out_file.write_all(file_data).expect("failed to write output file");
+
 
 }
