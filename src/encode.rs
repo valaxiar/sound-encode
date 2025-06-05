@@ -1,6 +1,6 @@
-use std::path::{Path, PathBuf};
-use hound::WavWriter;
 use crc32fast;
+use hound::WavWriter;
+use std::path::{Path, PathBuf};
 
 pub fn encode(input: Vec<u8>, input_path: &Path, output_filename: &Path) {
     let output_path = if output_filename.extension().map_or(true, |ext| ext != "wav") {
@@ -17,7 +17,7 @@ pub fn encode(input: Vec<u8>, input_path: &Path, output_filename: &Path) {
     let extension = input_path
         .extension()
         .and_then(|e| e.to_str())
-        .unwrap_or("bin");    // Pad if odd number of bytes (so all samples are full i16)
+        .unwrap_or("bin");
 
     let extension_bytes = extension.as_bytes();
 
@@ -34,7 +34,7 @@ pub fn encode(input: Vec<u8>, input_path: &Path, output_filename: &Path) {
     buf.push(extension_bytes.len() as u8);
     buf.extend_from_slice(extension_bytes);
     buf.extend_from_slice(&checksum.to_le_bytes());
-    buf.extend_from_slice(&(input.len() as u32).to_le_bytes()); // <--- new
+    buf.extend_from_slice(&(input.len() as u32).to_le_bytes());
     buf.extend_from_slice(&input);
 
     if buf.len() % 2 != 0 {
