@@ -1,9 +1,8 @@
-use crc32fast;
 use hound::WavWriter;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
 pub fn encode(input: Vec<u8>, input_path: &Path, output_filename: &Path) {
-    let output_path = if output_filename.extension().map_or(true, |ext| ext != "wav") {
+    let output_path = if output_filename.extension().is_none_or(|ext| ext != "wav") {
         let mut p = output_filename.to_path_buf();
         p.set_extension("wav");
         p
@@ -12,7 +11,7 @@ pub fn encode(input: Vec<u8>, input_path: &Path, output_filename: &Path) {
     };
 
     let checksum = crc32fast::hash(&input);
-    println!("Checksum: {}", checksum);
+    println!("Checksum: {checksum}");
 
     let extension = input_path
         .extension()

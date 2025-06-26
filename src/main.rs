@@ -1,5 +1,5 @@
 use std::env::args;
-use std::fs::{self, File};
+use std::fs::{self};
 use std::path::Path;
 
 mod decode;
@@ -8,7 +8,6 @@ mod encode;
 fn main() {
     let args: Vec<String> = args().collect();
 
-    let operation = &args[1];
     let input_path = Path::new(&args[2]);
     let output_filename = Path::new(&args[3]);
 

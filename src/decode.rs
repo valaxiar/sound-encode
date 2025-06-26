@@ -1,4 +1,3 @@
-use crc32fast;
 use hound::WavReader;
 use std::fs::File;
 use std::io::Write;
@@ -18,7 +17,6 @@ pub fn decode(path: &Path, output_filename: &Path) {
     let ext_end = ext_start + ext_len;
     let checksum_start = ext_end;
     let checksum_end = checksum_start + 4;
-    let data_start = checksum_end;
     let length_start = checksum_end;
     let length_end = length_start + 4;
     let data_start = length_end;
@@ -42,7 +40,7 @@ pub fn decode(path: &Path, output_filename: &Path) {
             .expect("couldn't decode checksum"),
     );
     let file_data = &bytes_raw[data_start..data_start + data_length];
-    let checksum = crc32fast::hash(&file_data);
+    let checksum = crc32fast::hash(file_data);
 
     if checksum == stored_checksum {
         println!("Checksum matches!");
@@ -56,8 +54,8 @@ pub fn decode(path: &Path, output_filename: &Path) {
             .write_all(file_data)
             .expect("failed to write output file");
     } else {
-        eprintln!("Found checksum: {}", checksum);
-        eprintln!("Stored checksum: {}", stored_checksum);
+        eprintln!("Found checksum: {checksum}");
+        eprintln!("Stored checksum: {stored_checksum}");
         panic!("Checksums don't match. possibly corrupted")
     }
 }
