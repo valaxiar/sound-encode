@@ -30,7 +30,7 @@
 
 ### AUR:
 
-###### an [AUR Package](https://aur.archlinux.org/packages/sound-encodehttps:/) is available
+###### an [AUR Package](https://aur.archlinux.org/packages/sound-encode) is available
 
 `paru -S sound-encode`
 or
