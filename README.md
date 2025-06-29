@@ -4,7 +4,7 @@
 
 #### - Converts an input file into .wav format while keeping the original file extension and verifying integrity via checksum when decoded.
 
-### - Supports *optional compression using [Snappy](https://github.com/google/snappy)
+### - Supports optional compression using [Snappy](https://github.com/google/snappy)
 
 ### Usage:
 
@@ -28,6 +28,14 @@
 
 ###### run: `cargo build --release` in the root directory of the project
 
-Releases:
+### AUR:
+
+###### an [AUR Package](https://aur.archlinux.org/packages/sound-encodehttps:/) is available
+
+`paru -S sound-encode`
+or
+`yay -S sound-encode`
+
+### Releases:
 
 ###### precompiled binaries for Windows x86_64 and x86_64 Linux can be found [here](https://github.com/valaxiar/sound-encode/releases/)
